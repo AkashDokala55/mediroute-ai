@@ -86,6 +86,10 @@ const AppRoutes = () => {
   }
 />
 <Route
+  path="/shared-report/:id"
+  element={<SharedReport />}
+/>
+<Route
   path="/emergency-qr"
   element={
     <ProtectedRoute>
