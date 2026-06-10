@@ -16,7 +16,7 @@ import {
 } from "../../services/dashboardService";
 import DashboardHero from "../../components/dashboard/DashboardHero";
 import HealthTicker
-from "../../components/dashboard/HealthTicker";
+from "../../components/dashboard/healthTicker";
 import WellnessCarousel
 from "../../components/dashboard/WellnessCarousel";
 import FloatingSupportButton
