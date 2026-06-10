@@ -120,7 +120,7 @@ const QRCodePreview = ({ card }) => {
       id="emergency-qr"
       value={
         card
-          ? `https://mediroute-ai-gvqi.onrender.com/emergency/${card.qrId}`
+          ? `https://mediroute-ai-1gb5.onrender.com/emergency/${card.qrId}`
           : "No Card"
       }
       size={160}

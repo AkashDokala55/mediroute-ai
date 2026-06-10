@@ -1,5 +1,5 @@
 const API =
-  "https://mediroute-ai-gvqi.onrender.com/api/medicine-expiry";
+  "https://mediroute-ai-1gb5.onrender.com/api/medicine-expiry";
 
 const getToken = () =>
   localStorage.getItem("token");

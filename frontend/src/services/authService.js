@@ -1,5 +1,5 @@
 const API =
-  "https://mediroute-ai-gvqi.onrender.com/api/auth";
+  "https://mediroute-ai-1gb5.onrender.com/api/auth";
 
 export const registerUser =
   async (userData) => {

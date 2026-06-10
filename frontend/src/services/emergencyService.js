@@ -1,5 +1,5 @@
 const API =
-  "https://mediroute-ai-gvqi.onrender.com";
+  "https://mediroute-ai-1gb5.onrender.com";
 
 const getToken = () =>
   localStorage.getItem("token");
@@ -23,7 +23,7 @@ export const createEmergencyCard =
 
     const response =
       await fetch(
-        "https://mediroute-ai-gvqi.onrender.com/api/emergency",
+        "https://mediroute-ai-1gb5.onrender.com/api/emergency",
         {
           method: "POST",
 

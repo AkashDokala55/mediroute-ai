@@ -34,7 +34,7 @@ const [
 
           const response =
             await fetch(
-              `https://mediroute-ai-gvqi.onrender.com/api/reports/qr/${qrId}`
+              `https://mediroute-ai-1gb5.onrender.com/api/reports/qr/${qrId}`
             );
 
           const data =

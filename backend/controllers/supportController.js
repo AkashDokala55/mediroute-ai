@@ -1,0 +1,152 @@
+const SupportRequest =
+  require(
+    "../models/SupportRequest"
+  );
+
+const nodemailer =
+  require("nodemailer");
+
+const transporter =
+  nodemailer.createTransport({
+    host: "smtp.gmail.com",
+
+    port: 587,
+
+    secure: false,
+
+    auth: {
+      user:
+        process.env.EMAIL_USER,
+
+      pass:
+        process.env.EMAIL_PASS,
+    },
+    tls: {
+      rejectUnauthorized: false,
+    },
+  });
+
+const submitSupportRequest =
+  async (
+    req,
+    res
+  ) => {
+
+    try {
+
+      const {
+        name,
+        email,
+        subject,
+        message,
+      } = req.body;
+
+      const totalTickets =
+  await SupportRequest.countDocuments();
+
+const ticketId =
+  `MED-${String(
+    totalTickets + 1
+  ).padStart(6, "0")}`;
+
+      const support =
+        await SupportRequest.create(
+          {
+            ticketId,
+            name,
+            email,
+            subject,
+            message,
+          }
+        );
+
+      // MAIL TO YOU
+
+      await transporter.sendMail({
+        from:
+          process.env.EMAIL_USER,
+
+        to:
+          "akashalpha55@gmail.com",
+
+        subject:
+          `[${ticketId}] ${subject}`,
+
+        html: `
+          <h2>New Support Request</h2>
+
+          <p><b>Ticket:</b> ${ticketId}</p>
+
+          <p><b>Name:</b> ${name}</p>
+
+          <p><b>Email:</b> ${email}</p>
+
+          <p><b>Subject:</b> ${subject}</p>
+
+          <p><b>Message:</b></p>
+
+          <p>${message}</p>
+        `,
+      });
+
+      // AUTO REPLY
+
+      await transporter.sendMail({
+        from:
+          process.env.EMAIL_USER,
+
+        to: email,
+
+        subject:
+          "MediRoute AI Support Request Received",
+
+        html: `
+          <h2>Support Request Received</h2>
+
+          <p>Hello ${name},</p>
+
+          <p>
+            Thank you for contacting
+            MediRoute AI.
+          </p>
+
+          <p>
+            Your ticket ID:
+            <b>${ticketId}</b>
+          </p>
+
+          <p>
+            Our team will respond
+            within 24 hours.
+          </p>
+
+          <p>
+            Regards,<br/>
+            MediRoute AI Support
+          </p>
+        `,
+      });
+
+      res.status(201).json({
+        message:
+          "Support request submitted successfully",
+
+        ticketId,
+      });
+
+    } catch (
+      error
+    ) {
+
+      
+
+      res.status(500).json({
+        message:
+          error.message,
+      });
+    }
+  };
+
+module.exports = {
+  submitSupportRequest,
+};

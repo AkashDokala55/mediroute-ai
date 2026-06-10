@@ -12,7 +12,7 @@ const EmergencyCard = ({card,}) => {
   const handleShare = async () => {
 
   const emergencyUrl =
-    `https://mediroute-ai-gvqi.onrender.com/emergency/${card?.qrId}`;
+    `https://mediroute-ai-1gb5.onrender.com/emergency/${card?.qrId}`;
 
   await navigator.clipboard.writeText(
     emergencyUrl
