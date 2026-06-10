@@ -86,7 +86,7 @@ const AppRoutes = () => {
   }
 />
 <Route
-  path="/shared-report/:id"
+  path="/share/:id"
   element={<SharedReport />}
 />
 <Route
