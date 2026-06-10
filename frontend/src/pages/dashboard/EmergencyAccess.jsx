@@ -41,7 +41,7 @@ const EmergencyAccess = () => {
 
           const response =
             await fetch(
-              `https://mediroute-ai-1gb5.onrender.com/api/emergency/qr/${id}`
+              `${window.location.origin}/emergency/${card.id}`
             );
 
           const data =
