@@ -1,0 +1,214 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background-color: #F8FAFC;
+}
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+body {
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
+  background: #f5f7ff;
+}
+
+/* SMOOTH GLOBAL TRANSITIONS */
+* {
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+/* BETTER BUTTON FEEL */
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* REMOVE MOBILE BLUE TAP */
+a,
+button,
+input,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* SMOOTH SCROLLBAR */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #eef2ff;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    to bottom,
+    #2563eb,
+    #7c3aed
+  );
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  opacity: 0.8;
+}
+.responsive-page {
+  width: 100%;
+  padding: 1rem;
+}
+
+@media (min-width: 640px) {
+  .responsive-page {
+    padding: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-page {
+    padding: 2.5rem;
+  }
+}
+
+.responsive-modal {
+  width: 100%;
+  max-height: 95vh;
+  overflow-y: auto;
+}
+
+.responsive-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .responsive-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1280px) {
+  .responsive-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+/* =========================================
+   GLOBAL RESPONSIVE FIXES
+========================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+img,
+video,
+iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+button,
+input,
+select,
+textarea {
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+@keyframes ticker {
+
+  0% {
+    transform:
+      translateX(0);
+  }
+
+  100% {
+    transform:
+      translateX(-50%);
+  }
+}
+
+.ticker-track {
+
+  width: max-content;
+
+  animation:
+    ticker 25s linear infinite;
+}
+@keyframes wellnessScroll {
+
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.wellness-track {
+
+  width: max-content;
+
+  animation:
+    wellnessScroll 30s linear infinite;
+}
+
+.wellness-track:hover {
+
+  animation-play-state:
+    paused;
+}
