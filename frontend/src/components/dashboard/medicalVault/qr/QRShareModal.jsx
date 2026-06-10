@@ -63,8 +63,8 @@ const QRShareModal = ({
   ) {
 
     setShareUrl(
-      `https://mediroute-ai-1gb5.onrender.com/shared-report/${report.qrId}`
-    );
+  `${window.location.origin}/shared-report/${report.qrId}`
+);
   }
 
 }, [

@@ -20,6 +20,7 @@ const EmergencyAccess = () => {
 
   const { id } =
     useParams();
+    console.log("Emergency  =", id);
 
   const [
     card,
