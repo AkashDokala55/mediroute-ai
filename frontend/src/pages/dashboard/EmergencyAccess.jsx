@@ -18,7 +18,7 @@ import {
 
 const EmergencyAccess = () => {
 
-  const { qrId } =
+  const { id } =
     useParams();
 
   const [
@@ -40,7 +40,7 @@ const EmergencyAccess = () => {
 
           const response =
             await fetch(
-              `https://mediroute-ai-1gb5.onrender.com/api/emergency/qr/${qrId}`
+              `https://mediroute-ai-1gb5.onrender.com/api/emergency/qr/${id}`
             );
 
           const data =
