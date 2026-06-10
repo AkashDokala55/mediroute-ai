@@ -1,5 +1,5 @@
 const API =
-  "https://mediroute-ai-1gb5.onrender.com";
+  "https://mediroute-ai-1gb5.onrender.com/api/emergency";
 
 const getToken = () =>
   localStorage.getItem("token");
