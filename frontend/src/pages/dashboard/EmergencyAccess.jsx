@@ -33,7 +33,8 @@ useEffect(() => {
 
       const data =
         await response.json();
-
+console.log("Emergency Data:", data);
+console.log("Emergency ID:", id);
       setCard(data);
 
     } catch (error) {
