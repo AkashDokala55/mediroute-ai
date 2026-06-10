@@ -119,10 +119,10 @@ const QRCodePreview = ({ card }) => {
 >    <QRCode
       id="emergency-qr"
       value={
-        card
-          ? `${window.location.origin}/emergency/${selectedCard.qrId}`
-          : "No Card"
-      }
+  card
+    ? `${window.location.origin}/emergency/${card.qrId}`
+    : "No Card"
+}
       size={160}
     />
   </div>

@@ -18,51 +18,38 @@ import {
 
 const EmergencyAccess = () => {
 
-  const { id } =
-    useParams();
-    console.log("Emergency  =", id);
+  const { id } = useParams();
 
-  const [
-    card,
-    setCard,
-  ] = useState(null);
+useEffect(() => {
 
-  const [
-    loading,
-    setLoading,
-  ] = useState(true);
+  const loadCard = async () => {
 
-  useEffect(() => {
+    try {
 
-    const loadCard =
-      async () => {
+      const response =
+        await fetch(
+          `https://mediroute-ai-1gb5.onrender.com/api/emergency/qr/${id}`
+        );
 
-        try {
+      const data =
+        await response.json();
 
-          const response =
-            await fetch(
-              `${window.location.origin}/emergency/${card.id}`
-            );
+      setCard(data);
 
-          const data =
-            await response.json();
+    } catch (error) {
 
-          setCard(data);
+      console.log(error);
 
-        } catch (error) {
+    } finally {
 
-          
+      setLoading(false);
 
-        } finally {
+    }
+  };
 
-          setLoading(false);
-        }
-      };
+  loadCard();
 
-    loadCard();
-
-  }, [id]);
-
+}, [id]);
   if (loading) {
 
     return (
@@ -278,7 +265,9 @@ const EmergencyAccess = () => {
 
                 <h3 className="mt-4 break-all text-lg font-black">
 
-                  {card.id}
+                  <h3>
+  {card.qrId}
+</h3>
                 </h3>
 
                 <div className="mt-10 border-t border-white/20 pt-5">
