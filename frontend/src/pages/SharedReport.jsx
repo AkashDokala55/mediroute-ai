@@ -9,7 +9,7 @@ import {
 
 const SharedReport = () => {
 
-  const { qrId } =
+  const { id } =
     useParams();
 const [
   error,
@@ -34,7 +34,7 @@ const [
 
           const response =
             await fetch(
-              `https://mediroute-ai-1gb5.onrender.com/api/reports/qr/${qrId}`
+              `https://mediroute-ai-1gb5.onrender.com/api/reports/qr/${id}`
             );
 
           const data =
@@ -63,7 +63,7 @@ if (
 
     loadReport();
 
-  }, [qrId]);
+  }, [id]);
 
   if (loading) {
 
