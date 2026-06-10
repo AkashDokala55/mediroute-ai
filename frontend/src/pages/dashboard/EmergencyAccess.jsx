@@ -19,6 +19,9 @@ import {
 const EmergencyAccess = () => {
 
   const { id } = useParams();
+  const [card, setCard] = useState(null);
+
+const [loading, setLoading] = useState(true);
 
 useEffect(() => {
 

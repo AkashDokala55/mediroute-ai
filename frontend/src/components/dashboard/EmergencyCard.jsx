@@ -8,6 +8,9 @@ import {
   QrCode,
 } from "lucide-react";
 import toast from "react-hot-toast";
+import QRCodeModule from "react-qr-code";
+
+const QRCode = QRCodeModule.default;
 const EmergencyCard = ({card,}) => {
   const handleShare = async () => {
 
@@ -176,12 +179,14 @@ const handleDownloadQR =
           <div className="absolute inset-0 rounded-[36px] border border-cyan-300/30 animate-ping" />
 
           <div className="rounded-[28px] bg-white p-6 shadow-2xl">
-            
-            <QrCode
-              size={120}
-              className="text-black"
-            />
-          </div>
+
+  <QRCode
+    id="emergency-qr"
+    value={`${window.location.origin}/emergency/${card?.qrId}`}
+    size={120}
+  />
+
+</div>
         </motion.div>
       </div>
 
