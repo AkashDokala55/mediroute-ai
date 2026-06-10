@@ -10,7 +10,7 @@ import Login from "../pages/auth/Login";
 
 import Signup from "../pages/auth/Signup";
 
-import DashboardHome from "../pages/dashboard/dashboardhome";
+import DashboardHome from "../pages/dashboard/DashboardHome";
 
 import MedicalVault from "../pages/dashboard/MedicalVault";
 
