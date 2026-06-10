@@ -60,7 +60,7 @@ const EmergencyAccess = () => {
 
     loadCard();
 
-  }, [qrId]);
+  }, [id]);
 
   if (loading) {
 
@@ -277,7 +277,7 @@ const EmergencyAccess = () => {
 
                 <h3 className="mt-4 break-all text-lg font-black">
 
-                  {card.qrId}
+                  {card.id}
                 </h3>
 
                 <div className="mt-10 border-t border-white/20 pt-5">
