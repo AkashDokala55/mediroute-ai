@@ -1,5 +1,5 @@
 const API =
-  "https://mediroute-ai-gvqi.onrender.com/api/support";
+  "https://mediroute-ai-1gb5.onrender.com/api/support";
 
 export const submitSupportRequest =
   async (

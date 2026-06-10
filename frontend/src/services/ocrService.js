@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API =
-  "https://mediroute-ai-gvqi.onrender.com/api/ocr";
+  "https://mediroute-ai-1gb5.onrender.com/api/ocr";
 
 export const scanMedicineImage =
   async (file) => {
