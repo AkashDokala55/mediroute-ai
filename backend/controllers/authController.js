@@ -188,7 +188,10 @@ const registerUser = async (
 };
 const transporter =
   nodemailer.createTransport({
-    service: "gmail",
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false,
+
 
     auth: {
       user:
@@ -281,15 +284,16 @@ const transporter =
           "OTP sent successfully",
       });
 
-    } catch (
-      error
-    ) {
+    } catch (error) {
 
-      res.status(500).json({
-        message:
-          error.message,
-      });
-    }
+  console.log("SEND OTP ERROR:");
+  console.log(error);
+
+  res.status(500).json({
+    message: error.message,
+    error: String(error),
+  });
+}
   };
   const verifyResetOtp =
   async (
