@@ -429,17 +429,7 @@ console.log("EMAIL_USER:", process.env.EMAIL_USER);
 console.log("EMAIL_PASS exists:", !!process.env.EMAIL_PASS);
     const { email } =
       req.body;
-catch (error) {
 
-  console.log("SIGNUP OTP ERROR:");
-  console.log(error);
-
-  res.status(500).json({
-    message: error.message,
-    error: String(error),
-  });
-
-}
     const existingUser =
       await User.findOne({
         email,
