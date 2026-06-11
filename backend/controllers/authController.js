@@ -188,9 +188,7 @@ const registerUser = async (
 };
 const transporter =
   nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 465,
-    secure: false,
+    service: "gmail",
 
 
     auth: {
@@ -275,6 +273,7 @@ const transporter =
           <p>Valid for 10 minutes.</p>
         `,
       });
+console.log("OTP =", otp);
 
       res.json({
         message:
