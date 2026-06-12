@@ -464,8 +464,12 @@ console.log("OTP =", otp);
 
     console.log("About to send email...");
 
+    try {
+
+  const info =
     await transporter.sendMail({
-      from: process.env.EMAIL_USER,
+      from:
+        process.env.EMAIL_USER,
       to: email,
       subject:
         "MediRoute AI Email Verification",
@@ -475,6 +479,39 @@ console.log("OTP =", otp);
         <p>Valid for 10 minutes.</p>
       `,
     });
+
+  console.log(
+    "MAIL SENT SUCCESSFULLY"
+  );
+
+  console.log(info);
+
+} catch (mailError) {
+
+  console.log(
+    "MAIL ERROR START"
+  );
+
+  console.log(mailError);
+
+  console.log(
+    "MAIL ERROR MESSAGE:"
+  );
+
+  console.log(
+    mailError.message
+  );
+
+  console.log(
+    "MAIL ERROR CODE:"
+  );
+
+  console.log(
+    mailError.code
+  );
+
+  throw mailError;
+}
 
     console.log(
       "Email sent successfully"
