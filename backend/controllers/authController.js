@@ -188,7 +188,9 @@ const registerUser = async (
 };
 const transporter =
   nodemailer.createTransport({
-    service: "gmail",
+    host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
 
 
     auth: {
@@ -198,6 +200,9 @@ const transporter =
       pass:
         process.env.EMAIL_PASS,
     },
+    connectionTimeout: 10000,
+  greetingTimeout: 10000,
+  socketTimeout: 10000,
 
     tls: {
       rejectUnauthorized:
@@ -461,7 +466,11 @@ console.log("OTP =", otp);
     };
 
     console.log("OTP Stored");
+console.log("VERIFYING SMTP...");
 
+await transporter.verify();
+
+console.log("SMTP VERIFIED");
     console.log("About to send email...");
 
     try {
