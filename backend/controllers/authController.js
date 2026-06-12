@@ -509,58 +509,7 @@ console.log("OTP =", otp);
     });
   }
 };
-    const otp =
-      Math.floor(
-        100000 +
-          Math.random() *
-            900000
-      ).toString();
-
-    global.signupOtps =
-      global.signupOtps || {};
-
-    global.signupOtps[
-      email
-    ] = {
-      otp,
-      expiry:
-        Date.now() +
-        10 * 60 * 1000,
-    };
-
-    await transporter.sendMail({
-      from:
-        process.env.EMAIL_USER,
-
-      to: email,
-
-      subject:
-        "MediRoute AI Email Verification",
-
-      html: `
-      <h2>Email Verification</h2>
-      <h1>${otp}</h1>
-      <p>Valid for 10 minutes.</p>
-      `,
-    });
-
-    res.json({
-      message:
-        "OTP sent successfully",
-    });
-
-  } catch (
-    error
-  ) {
-
     
-
-    res.status(500).json({
-      message:
-        error.message,
-    });
-  }
-};
 const verifySignupOtp =
   async (
     req,
