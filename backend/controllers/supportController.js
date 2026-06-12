@@ -16,7 +16,8 @@ const transporter =
       pass: process.env.BREVO_PASS,
     },
   });
-
+console.log("========== SUPPORT REQUEST START ==========");
+console.log(req.body);
 const submitSupportRequest =
   async (
     req,
@@ -123,17 +124,18 @@ const ticketId =
         ticketId,
       });
 
-    } catch (
-      error
-    ) {
+    } catch (error) {
 
-      
+  console.log("========== SUPPORT ERROR ==========");
+  console.log(error);
+  console.log("MESSAGE:", error.message);
+  console.log("STACK:", error.stack);
 
-      res.status(500).json({
-        message:
-          error.message,
-      });
-    }
+  res.status(500).json({
+    message: error.message,
+    error: String(error),
+  });
+}
   };
 
 module.exports = {
