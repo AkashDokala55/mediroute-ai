@@ -75,5 +75,25 @@ router.get("/env-test", (req, res) => {
     senderEmail: process.env.SENDER_EMAIL,
   });
 });
+router.get("/mail-test", async (req, res) => {
+  try {
+    const info = await transporter.sendMail({
+      from: "akashalpha55@gmail.com",
+      to: "akashalpha55@gmail.com",
+      subject: "Brevo Test",
+      html: "<h1>Brevo Working</h1>",
+    });
+
+    res.json(info);
+  } catch (err) {
+    console.log("MAIL TEST ERROR:");
+    console.log(err);
+
+    res.status(500).json({
+      message: err.message,
+      code: err.code,
+    });
+  }
+});
 module.exports =
   router;
