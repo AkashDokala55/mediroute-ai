@@ -16,14 +16,14 @@ const transporter =
       pass: process.env.BREVO_PASS,
     },
   });
-console.log("========== SUPPORT REQUEST START ==========");
-console.log(req.body);
+
 const submitSupportRequest =
   async (
     req,
     res
   ) => {
-
+console.log("========== SUPPORT REQUEST START ==========");
+  console.log(req.body);
     try {
 
       const {
