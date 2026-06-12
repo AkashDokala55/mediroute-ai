@@ -246,7 +246,7 @@ const transporter = nodemailer.createTransport({
 
       await transporter.sendMail({
   from:
-    akashalpha55@gmail.com,
+    "akashalpha55@gmail.com",
 
   to: email,
 
@@ -483,7 +483,7 @@ console.log("OTP =", otp);
     const info =
       await transporter.sendMail({
         from:
-          akashalpha55@gmail.com,
+          "akashalpha55@gmail.com",
         to: email,
         subject:
           "MediRoute AI Email Verification",
