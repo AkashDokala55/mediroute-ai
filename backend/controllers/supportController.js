@@ -22,10 +22,10 @@ const submitSupportRequest =
     req,
     res
   ) => {
+
+    try {
 console.log("========== SUPPORT REQUEST START ==========");
   console.log(req.body);
-    try {
-
       const {
         name,
         email,
