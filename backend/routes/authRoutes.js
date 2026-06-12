@@ -62,5 +62,18 @@ router.post(
   "/reset-password",
   resetPassword
 );
+router.get("/test", (req, res) => {
+  res.json({
+    status: "Backend Working",
+  });
+});
+
+router.get("/env-test", (req, res) => {
+  res.json({
+    brevoUser: process.env.BREVO_USER,
+    hasBrevoPass: !!process.env.BREVO_PASS,
+    senderEmail: process.env.SENDER_EMAIL,
+  });
+});
 module.exports =
   router;
