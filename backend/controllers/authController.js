@@ -418,34 +418,97 @@ console.log("OTP =", otp);
       });
     }
   };
-  const sendSignupOtp = async (
-  req,
-  res
-) => {
+  const sendSignupOtp = async (req, res) => {
 
   try {
-console.log("EMAIL_USER:", process.env.EMAIL_USER);
-console.log("EMAIL_PASS exists:", !!process.env.EMAIL_PASS);
-    const { email } =
-      req.body;
 
-    const existingUser =
-      await User.findOne({
-        email,
+    console.log("========== SEND SIGNUP OTP START ==========");
+
+    console.log("EMAIL_USER:", process.env.EMAIL_USER);
+    console.log("EMAIL_PASS exists:", !!process.env.EMAIL_PASS);
+
+    const { email } = req.body;
+
+    console.log("Received Email:", email);
+
+    const existingUser = await User.findOne({
+      email,
+    });
+
+    console.log("User Check Complete");
+
+    if (existingUser) {
+
+      return res.status(400).json({
+        message: "Email already registered",
       });
-
-    if (
-      existingUser
-    ) {
-
-      return res
-        .status(400)
-        .json({
-          message:
-            "Email already registered",
-        });
     }
 
+    const otp = Math.floor(
+      100000 + Math.random() * 900000
+    ).toString();
+
+    console.log("Generated OTP:", otp);
+
+    global.signupOtps =
+      global.signupOtps || {};
+
+    global.signupOtps[email] = {
+      otp,
+      expiry:
+        Date.now() +
+        10 * 60 * 1000,
+    };
+
+    console.log("OTP Stored");
+
+    console.log("About to send email...");
+
+    await transporter.sendMail({
+      from: process.env.EMAIL_USER,
+      to: email,
+      subject:
+        "MediRoute AI Email Verification",
+      html: `
+        <h2>Email Verification</h2>
+        <h1>${otp}</h1>
+        <p>Valid for 10 minutes.</p>
+      `,
+    });
+
+    console.log(
+      "Email sent successfully"
+    );
+
+    return res.json({
+      message:
+        "OTP sent successfully",
+    });
+
+  } catch (error) {
+
+    console.log(
+      "========== SEND SIGNUP OTP ERROR =========="
+    );
+
+    console.log(error);
+
+    console.log(
+      "ERROR MESSAGE:",
+      error.message
+    );
+
+    console.log(
+      "ERROR STACK:",
+      error.stack
+    );
+
+    return res.status(500).json({
+      message: error.message,
+      error: String(error),
+    });
+  }
+};
     const otp =
       Math.floor(
         100000 +
