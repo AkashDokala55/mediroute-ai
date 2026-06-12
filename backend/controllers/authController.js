@@ -188,7 +188,7 @@ const registerUser = async (
 };
 const transporter = nodemailer.createTransport({
   host: "smtp-relay.brevo.com",
-  port: 587,
+  port: 2525,
   secure: false,
 
   auth: {
@@ -479,20 +479,20 @@ console.log("OTP =", otp);
     console.log(
       "About to send email..."
     );
-
-    const info =
-      await transporter.sendMail({
-        from:
-          "akashalpha55@gmail.com",
-        to: email,
-        subject:
-          "MediRoute AI Email Verification",
-        html: `
-          <h2>Email Verification</h2>
-          <h1>${otp}</h1>
-          <p>Valid for 10 minutes.</p>
-        `,
-      });
+console.log("BREVO_USER =", process.env.BREVO_USER);
+console.log("FROM =", "akashalpha55@gmail.com");
+console.log("TO =", email);
+    const info = await transporter.sendMail({
+  from: '"MediRoute AI" <akashalpha55@gmail.com>',
+  to: email,
+  subject: "MediRoute AI Email Verification",
+  text: `Your OTP is ${otp}`,
+  html: `
+    <h2>Email Verification</h2>
+    <h1>${otp}</h1>
+    <p>Valid for 10 minutes.</p>
+  `,
+});
 
     console.log(
       "MAIL SENT SUCCESSFULLY"
