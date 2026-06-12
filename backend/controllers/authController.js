@@ -186,37 +186,22 @@ const registerUser = async (
     });
   }
 };
-const transporter =
-  nodemailer.createTransport({
-    service: "gmail",
+const transporter = nodemailer.createTransport({
+  host: "smtp-relay.brevo.com",
+  port: 587,
+  secure: false,
 
-    auth: {
-      user:
-        process.env.EMAIL_USER,
+  auth: {
+    user: process.env.BREVO_USER,
+    pass: process.env.BREVO_PASS,
+  },
+  connectionTimeout: 30000,
+  greetingTimeout: 30000,
+  socketTimeout: 30000,
+});
 
-      pass:
-        process.env.EMAIL_PASS,
-    },
 
-    tls: {
-      rejectUnauthorized:
-        false,
-    },
-  });
-  transporter.verify(
-  (error) => {
-
-    if (error) {
-
-      
-
-    } else {
-
-      
-
-    }
-  }
-);
+ 
   const sendResetOtp =
   async (
     req,
@@ -260,36 +245,38 @@ const transporter =
       await user.save();
 
       await transporter.sendMail({
-        from:
-          process.env.EMAIL_USER,
+  from:
+    "akashalpha55@gmail.com",
 
-        to: email,
+  to: email,
 
-        subject:
-          "MediRoute AI Password Reset OTP",
+  subject:
+    "MediRoute AI Password Reset OTP",
 
-        html: `
-          <h2>Password Reset</h2>
-          <p>Your OTP is:</p>
-          <h1>${otp}</h1>
-          <p>Valid for 10 minutes.</p>
-        `,
-      });
+  html: `
+    <h2>Password Reset</h2>
+    <p>Your OTP is:</p>
+    <h1>${otp}</h1>
+    <p>Valid for 10 minutes.</p>
+  `,
+});
+console.log("OTP =", otp);
 
       res.json({
         message:
           "OTP sent successfully",
       });
 
-    } catch (
-      error
-    ) {
+    } catch (error) {
 
-      res.status(500).json({
-        message:
-          error.message,
-      });
-    }
+  console.log("SEND OTP ERROR:");
+  console.log(error);
+
+  res.status(500).json({
+    message: error.message,
+    error: String(error),
+  });
+}
   };
   const verifyResetOtp =
   async (
@@ -418,85 +405,133 @@ const transporter =
       });
     }
   };
-  const sendSignupOtp = async (
-  req,
-  res
-) => {
-
+  const sendSignupOtp = async (req, res) => {
   try {
+    console.log(
+      "========== SEND SIGNUP OTP START =========="
+    );
 
-    const { email } =
-      req.body;
+    console.log(
+      "BREVO_USER:",
+      process.env.BREVO_USER
+    );
+
+    console.log(
+      "BREVO_PASS exists:",
+      !!process.env.BREVO_PASS
+    );
+
+    const { email } = req.body;
+
+    console.log(
+      "Received Email:",
+      email
+    );
 
     const existingUser =
       await User.findOne({
         email,
       });
 
-    if (
-      existingUser
-    ) {
+    console.log(
+      "User Check Complete"
+    );
 
-      return res
-        .status(400)
-        .json({
-          message:
-            "Email already registered",
-        });
+    if (existingUser) {
+      return res.status(400).json({
+        message:
+          "Email already registered",
+      });
     }
 
-    const otp =
-      Math.floor(
-        100000 +
-          Math.random() *
-            900000
-      ).toString();
+    const otp = Math.floor(
+      100000 +
+        Math.random() * 900000
+    ).toString();
+
+    console.log(
+      "Generated OTP:",
+      otp
+    );
 
     global.signupOtps =
       global.signupOtps || {};
 
-    global.signupOtps[
-      email
-    ] = {
+    global.signupOtps[email] = {
       otp,
       expiry:
         Date.now() +
         10 * 60 * 1000,
     };
 
-    await transporter.sendMail({
-      from:
-        process.env.EMAIL_USER,
+    console.log("OTP Stored");
 
-      to: email,
+    console.log(
+      "VERIFYING SMTP..."
+    );
 
-      subject:
-        "MediRoute AI Email Verification",
+    await transporter.verify();
 
-      html: `
-      <h2>Email Verification</h2>
-      <h1>${otp}</h1>
-      <p>Valid for 10 minutes.</p>
-      `,
-    });
+    console.log(
+      "SMTP VERIFIED"
+    );
 
-    res.json({
+    console.log(
+      "About to send email..."
+    );
+
+    const info =
+      await transporter.sendMail({
+        from:
+          "akashalpha55@gmail.com",
+        to: email,
+        subject:
+          "MediRoute AI Email Verification",
+        html: `
+          <h2>Email Verification</h2>
+          <h1>${otp}</h1>
+          <p>Valid for 10 minutes.</p>
+        `,
+      });
+
+    console.log(
+      "MAIL SENT SUCCESSFULLY"
+    );
+
+    console.log(info);
+
+    return res.json({
       message:
         "OTP sent successfully",
     });
 
-  } catch (
-    error
-  ) {
+  } catch (error) {
 
-    
+    console.log(
+      "========== SEND SIGNUP OTP ERROR =========="
+    );
 
-    res.status(500).json({
+    console.log(error);
+
+    console.log(
+      "ERROR MESSAGE:",
+      error.message
+    );
+
+    console.log(
+      "ERROR STACK:",
+      error.stack
+    );
+
+    return res.status(500).json({
       message:
         error.message,
+      error:
+        String(error),
     });
   }
 };
+    
 const verifySignupOtp =
   async (
     req,
