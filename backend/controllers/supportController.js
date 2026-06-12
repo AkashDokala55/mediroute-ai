@@ -5,24 +5,15 @@ const SupportRequest =
 
 const nodemailer =
   require("nodemailer");
-
 const transporter =
   nodemailer.createTransport({
-    host: "smtp.gmail.com",
-
+    host: "smtp-relay.brevo.com",
     port: 587,
-
     secure: false,
 
     auth: {
-      user:
-        process.env.EMAIL_USER,
-
-      pass:
-        process.env.EMAIL_PASS,
-    },
-    tls: {
-      rejectUnauthorized: false,
+      user: process.env.BREVO_USER,
+      pass: process.env.BREVO_PASS,
     },
   });
 
@@ -63,12 +54,11 @@ const ticketId =
       // MAIL TO YOU
 
       await transporter.sendMail({
-        from:
-          process.env.EMAIL_USER,
+        from: `"MediRoute AI" <akashalpha55@gmail.com>`,
 
         to:
           "akashalpha55@gmail.com",
-
+        replyTo: email,
         subject:
           `[${ticketId}] ${subject}`,
 
@@ -92,8 +82,7 @@ const ticketId =
       // AUTO REPLY
 
       await transporter.sendMail({
-        from:
-          process.env.EMAIL_USER,
+        from: `"MediRoute AI" <akashalpha55@gmail.com>`,
 
         to: email,
 

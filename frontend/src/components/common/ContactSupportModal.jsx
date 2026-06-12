@@ -220,7 +220,7 @@ lg:pl-[280px]
                     .value,
               })
             }
-            className="w-full rounded-2xl border border-gray-200 py-3 pl-11 pr-4 outline-none focus:border-blue-500"
+            className="w-full rounded-2xl border border-gray-200 py-3 pl-11 pr-4 outline-none focus:border-blue-500 text-black"
           />
 
         </div>
@@ -246,7 +246,7 @@ lg:pl-[280px]
                     .value,
               })
             }
-            className="w-full rounded-2xl border border-gray-200 py-3 pl-11 pr-4 outline-none focus:border-blue-500"
+            className="w-full rounded-2xl border border-gray-200 py-3 pl-11 pr-4 outline-none focus:border-blue-500 text-black"
           />
 
         </div>
@@ -272,7 +272,7 @@ lg:pl-[280px]
                     .value,
               })
             }
-            className="w-full rounded-2xl border border-gray-200 py-3 pl-11 pr-4 outline-none focus:border-blue-500"
+            className="w-full rounded-2xl border border-gray-200 py-3 pl-11 pr-4 outline-none focus:border-blue-500 text-black"
           />
 
         </div>
@@ -291,7 +291,7 @@ lg:pl-[280px]
                   .value,
             })
           }
-          className="w-full rounded-2xl border border-gray-200 p-4 outline-none focus:border-blue-500"
+          className="w-full rounded-2xl border border-gray-200 p-4 outline-none focus:border-blue-500 text-black"
         />
 
         <div className="rounded-2xl bg-blue-50 p-4 text-sm text-gray-600">
